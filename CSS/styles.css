@@ -1,5 +1,31 @@
 html,
+body,
 .wrapper {
     height: 100%;
     width: 100%;
+    background-color: #1e2227;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.title {
+    color: white;
+    font-size: xx-large;
+}
+
+td {
+    background-color: white;
+    padding: 25px;
+}
+
+
+th {
+    color: white;
+    background-color: black;
 }
