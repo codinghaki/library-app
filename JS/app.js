@@ -21,6 +21,10 @@ class Book {
       this.numPages
     } pages, ${this.isReadYet()}`;
   }
+
+  toggleReadStatus() {
+    this.read = !this.read;
+  }
 }
 
 function addBookToLibrary(book) {
@@ -40,35 +44,46 @@ function addBookRow(book, table, index) {
       <td>${book.author}</td>
       <td>${book.numPages}</td>
       <td>${book.isReadYet()}</td>
+      <td><button class="toggleReadButton" data-index="${index}">Toggle Read Status</button></td>
       <td><button class="removeBookButton" data-index="${index}">Remove</button></td>
-      <td></td>
-      <td></td>
     `;
   table.appendChild(newRow);
 }
 
+
 function displayBooks() {
-  const table = document.querySelector(".bookList");
-  const tbody = table.querySelector("tbody");
+  const table = document.querySelector('.bookList');
+  const tbody = table.querySelector('tbody');
 
   // Clear existing content in the tbody
-  tbody.innerHTML = "";
+  tbody.innerHTML = '';
 
   // Render the books in the table
   myLibrary.forEach((book, index) => {
     addBookRow(book, tbody, index);
   });
 
+  // Add event listeners to the "Toggle Read Status" buttons
+  const toggleButtons = document.querySelectorAll('.toggleReadButton');
+  toggleButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      const indexToToggle = e.target.dataset.index;
+      myLibrary[indexToToggle].toggleReadStatus();
+      displayBooks(); // Update the display after toggling read status
+    });
+  });
+
   // Add event listeners to the "Remove" buttons
-  const removeButtons = document.querySelectorAll(".removeBookButton");
+  const removeButtons = document.querySelectorAll('.removeBookButton');
   removeButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
+    button.addEventListener('click', (e) => {
       const indexToRemove = e.target.dataset.index;
       removeBook(indexToRemove);
       displayBooks(); // Update the display after removing a book
     });
   });
 }
+
 
 function removeBook(index) {
   myLibrary.splice(index, 1);
