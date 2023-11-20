@@ -23,8 +23,8 @@ class Book {
   }
 }
 
-function addBookToLibrary(book){
-    myLibrary.push(book);
+function addBookToLibrary(book) {
+  myLibrary.push(book);
 }
 
 const book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
@@ -34,23 +34,27 @@ addBookToLibrary(book1);
 addBookToLibrary(book2);
 addBookToLibrary(book3);
 
-function displayBooks(){
-    myLibrary.forEach((book) => {
-        const table = document.querySelector('.bookList');
-        const newRow = document.createElement('tr');
-        const titleCell = document.createElement('td');
-        titleCell.textContent = book.title;
-        const authorCell = document.createElement('td');
-        authorCell.textContent = book.author;
-        const pagesCell = document.createElement('td');
-        pagesCell.textContent = book.numPages;
+function createTableCell(text) {
+  const cell = document.createElement("td");
+  cell.textContent = text;
+  return cell;
+}
 
-        
-        newRow.appendChild(titleCell);
-        newRow.appendChild(authorCell);
-        newRow.appendChild(pagesCell);
-        table.appendChild(newRow)
-    })
+function addBookRow(book, table) {
+  const newRow = document.createElement("tr");
+  newRow.innerHTML = `
+      <td>${book.title}</td>
+      <td>${book.author}</td>
+      <td>${book.numPages}</td>
+    `;
+  table.appendChild(newRow);
+}
+
+function displayBooks() {
+  const table = document.querySelector(".bookList");
+  myLibrary.forEach((book) => {
+    addBookRow(book, table);
+  });
 }
 
 displayBooks();

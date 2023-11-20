@@ -14,9 +14,30 @@
                 Library App
             </span>
         </div>
-        <div>
-            <button>Add Book</button>
-        </div>
+      <div class="addBookForm">
+        <form action="" method="get">
+          <div>
+            <label for="">Title</label>
+            <input type="text" name="title" id="title" required>
+          </div>
+          <div>
+            <label for="">Author</label>
+            <input type="text" name="author" id="author" required>
+          </div>
+          <div>
+            <label for="">Pages</label>
+            <input type="number" name="pages" id="pages" required>
+          </div>
+          <div>
+            <label for="">Read:</label>
+            <span>Yes</span>
+            <input type="radio" name="read">
+            <span>No</span>
+            <input type="radio" name="read">
+          </div>
+          <button>Add Book</button>
+        </form>
+      </div>
       <div class="bookListContainer">
         <table class="bookList">
           <thead>

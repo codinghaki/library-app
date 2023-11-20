@@ -16,7 +16,7 @@ body,
 
 .title {
     color: white;
-    font-size: xx-large;
+    font-size: 100px;
 }
 
 td {
@@ -28,4 +28,14 @@ td {
 th {
     color: white;
     background-color: black;
+}
+
+form {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 15px;
+    margin: 50px;
 }
