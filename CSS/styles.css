@@ -31,6 +31,7 @@ th {
 }
 
 form {
+    font-size: xx-large;
     color: white;
     display: flex;
     flex-direction: column;
@@ -38,4 +39,11 @@ form {
     align-items: center;
     gap: 15px;
     margin: 50px;
+}
+
+#addBookButton {
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    width: 50%;
 }

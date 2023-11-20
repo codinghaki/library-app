@@ -9,33 +9,31 @@
   </head>
   <body>
     <div class="wrapper">
-        <div>
-            <span class="title">
-                Library App
-            </span>
-        </div>
+      <div>
+        <span class="title"> Library App </span>
+      </div>
       <div class="addBookForm">
         <form action="" method="get">
           <div>
             <label for="">Title</label>
-            <input type="text" name="title" id="title" required>
+            <input type="text" name="title" id="title" required />
           </div>
           <div>
             <label for="">Author</label>
-            <input type="text" name="author" id="author" required>
+            <input type="text" name="author" id="author" required />
           </div>
           <div>
             <label for="">Pages</label>
-            <input type="number" name="pages" id="pages" required>
+            <input type="number" name="pages" id="pages" required />
           </div>
           <div>
             <label for="">Read:</label>
             <span>Yes</span>
-            <input type="radio" name="read">
+            <input type="radio" name="read" value="1"/>
             <span>No</span>
-            <input type="radio" name="read">
+            <input type="radio" name="read" value="0"/>
           </div>
-          <button>Add Book</button>
+          <button id="addBookButton">Add Book</button>
         </form>
       </div>
       <div class="bookListContainer">
@@ -51,6 +49,7 @@
               <th></th>
             </tr>
           </thead>
+          <tbody></tbody>
         </table>
       </div>
     </div>

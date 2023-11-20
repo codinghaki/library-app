@@ -1,5 +1,7 @@
 const myLibrary = [];
 
+
+
 class Book {
   constructor(title, author, numPages, read) {
     this.title = title;
@@ -27,13 +29,6 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
-const book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
-const book2 = new Book("To Kill a Mockingbird", "Harper Lee", 281, false);
-const book3 = new Book("1984", "George Orwell", 328, true);
-addBookToLibrary(book1);
-addBookToLibrary(book2);
-addBookToLibrary(book3);
-
 function createTableCell(text) {
   const cell = document.createElement("td");
   cell.textContent = text;
@@ -46,15 +41,59 @@ function addBookRow(book, table) {
       <td>${book.title}</td>
       <td>${book.author}</td>
       <td>${book.numPages}</td>
+      <td>${book.isReadYet()}</td>
+      <td></td>
+      <td></td>
+      <td></td>
     `;
   table.appendChild(newRow);
 }
 
+
 function displayBooks() {
-  const table = document.querySelector(".bookList");
+  const table = document.querySelector('.bookList');
+  const tbody = table.querySelector('tbody');
+
+  // Clear existing content in the tbody
+  tbody.innerHTML = '';
+
+  // Render the books in the table
   myLibrary.forEach((book) => {
-    addBookRow(book, table);
+    addBookRow(book, tbody);
   });
 }
 
+
+
+document.querySelector('.addBookForm form').addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const title = document.querySelector('#title').value;
+  const author = document.querySelector('#author').value;
+  const pages = document.querySelector('#pages').value;
+  const read = document.querySelector('input[name="read"]:checked').value === '1';
+
+  const newBook = new Book(title, author, pages, read);
+  addBookToLibrary(newBook);
+
+  // Clear the form fields after adding a book
+  document.querySelector('#title').value = '';
+  document.querySelector('#author').value = '';
+  document.querySelector('#pages').value = '';
+  document.querySelector('input[name="read"]:checked').checked = false;
+
+  // Display the updated list of books
+  displayBooks();
+});
+
+
+// Create a book instance
+const exampleBook = new Book("The Example Book", "John Doe", 200, true);
+// Add the book to the library
+addBookToLibrary(exampleBook);
+// Display the updated list of books
 displayBooks();
+
+
+
+
