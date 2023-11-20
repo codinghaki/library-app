@@ -1,7 +1,5 @@
 const myLibrary = [];
 
-
-
 class Book {
   constructor(title, author, numPages, read) {
     this.title = title;
@@ -35,51 +33,63 @@ function createTableCell(text) {
   return cell;
 }
 
-function addBookRow(book, table) {
+function addBookRow(book, table, index) {
   const newRow = document.createElement("tr");
   newRow.innerHTML = `
       <td>${book.title}</td>
       <td>${book.author}</td>
       <td>${book.numPages}</td>
       <td>${book.isReadYet()}</td>
-      <td></td>
+      <td><button class="removeBookButton" data-index="${index}">Remove</button></td>
       <td></td>
       <td></td>
     `;
   table.appendChild(newRow);
 }
 
-
 function displayBooks() {
-  const table = document.querySelector('.bookList');
-  const tbody = table.querySelector('tbody');
+  const table = document.querySelector(".bookList");
+  const tbody = table.querySelector("tbody");
 
   // Clear existing content in the tbody
-  tbody.innerHTML = '';
+  tbody.innerHTML = "";
 
   // Render the books in the table
-  myLibrary.forEach((book) => {
-    addBookRow(book, tbody);
+  myLibrary.forEach((book, index) => {
+    addBookRow(book, tbody, index);
+  });
+
+  // Add event listeners to the "Remove" buttons
+  const removeButtons = document.querySelectorAll(".removeBookButton");
+  removeButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const indexToRemove = e.target.dataset.index;
+      removeBook(indexToRemove);
+      displayBooks(); // Update the display after removing a book
+    });
   });
 }
 
+function removeBook(index) {
+  myLibrary.splice(index, 1);
+}
 
-
-document.querySelector('.addBookForm form').addEventListener('submit', (e) => {
+document.querySelector(".addBookForm form").addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const title = document.querySelector('#title').value;
-  const author = document.querySelector('#author').value;
-  const pages = document.querySelector('#pages').value;
-  const read = document.querySelector('input[name="read"]:checked').value === '1';
+  const title = document.querySelector("#title").value;
+  const author = document.querySelector("#author").value;
+  const pages = document.querySelector("#pages").value;
+  const read =
+    document.querySelector('input[name="read"]:checked').value === "1";
 
   const newBook = new Book(title, author, pages, read);
   addBookToLibrary(newBook);
 
   // Clear the form fields after adding a book
-  document.querySelector('#title').value = '';
-  document.querySelector('#author').value = '';
-  document.querySelector('#pages').value = '';
+  document.querySelector("#title").value = "";
+  document.querySelector("#author").value = "";
+  document.querySelector("#pages").value = "";
   document.querySelector('input[name="read"]:checked').checked = false;
 
   // Display the updated list of books
@@ -87,13 +97,7 @@ document.querySelector('.addBookForm form').addEventListener('submit', (e) => {
 });
 
 
-// Create a book instance
+
 const exampleBook = new Book("The Example Book", "John Doe", 200, true);
-// Add the book to the library
 addBookToLibrary(exampleBook);
-// Display the updated list of books
 displayBooks();
-
-
-
-
